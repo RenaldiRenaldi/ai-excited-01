@@ -3,5 +3,5 @@ import { join } from 'node:path';
 
 const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 mkdirSync(outputDir, { recursive: true });
-// Preserve the same image bytes on every run.
+// Copy the fixed constellation image byte-for-byte.
 copyFileSync(new URL('./entry.png', import.meta.url), join(outputDir, 'entry.png'));
