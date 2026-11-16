@@ -3,5 +3,5 @@ import { join } from 'node:path';
 
 const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 mkdirSync(outputDir, { recursive: true });
-// Copy the fixed image bytes for deterministic judging.
+// Preserve the same image bytes on every run.
 copyFileSync(new URL('./entry.png', import.meta.url), join(outputDir, 'entry.png'));
