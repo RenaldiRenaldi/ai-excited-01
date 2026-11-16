@@ -1,7 +1,10 @@
-import { copyFileSync, mkdirSync } from 'node:fs';
+import { copyFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 
-const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
-mkdirSync(outputDir, { recursive: true });
-// Copy the fixed constellation image byte-for-byte.
-copyFileSync(new URL('./entry.png', import.meta.url), join(outputDir, 'entry.png'));
+// Deterministically publish the original artwork: no decoding or re-encoding.
+const outputDir = process.env.MAKEFUN_OUTPUT_DIR || '/output';
+await mkdir(outputDir, { recursive: true });
+await copyFile(
+  new URL('./entry.png', import.meta.url),
+  join(outputDir, 'entry.png'),
+);
